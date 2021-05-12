@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Books & Authors</title>
+</head>
+<body>
+    <nav class="menu">
+        <span class="navbar-brand mb-0 h1">Library</span>
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="/books">Books</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/authors">Authors</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Add a Book</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books %}
+                <tr>
+                    <th>{{book.id}}</th>
+                    <td>{{book.title}}</td>
+                    <td><a href="/books/{{book.id}}">View</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <form action="/books/create" method="POST">
+            {% csrf_token %}
+            <div class="col form-group">
+                <label for="title">Title:</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+            <div class="col form-group">
+                <label for="desc">Description:</label>
+                <textarea type="text" class="form-control" name="desc"></textarea>
+            </div>
+            <div class="btn">
+                <button type="submit" class="btn btn-primary">Add Book</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
