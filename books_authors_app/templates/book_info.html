@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <title>Books & Authors</title>
 </head>
 <body>
@@ -17,19 +19,24 @@
             <li class="nav-item active">
                 <a class="nav-link" href="/authors">Authors</a>
             </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/">Home</a>
+            </li>
         </ul>
     </nav>
 
     <div class="container">
         <h1>{{book.title}}</h1>
-        <p><span>ID: </span>{{book.id}}</p>
-        <p><span>Description: </span>{{book.desc}}</p>
-        <p><span>Authors: </span></p>
-        <ul>
-            {% for author in book.authors.all %}
-            <li>{{author}}</li>
-            {% endfor %}
-        </ul>
+        <div class="info">
+            <p><span>ID: </span>{{book.id}}</p>
+            <p><span>Description: </span>{{book.desc}}</p>
+            <p><span>Authors: </span></p>
+            <ul>
+                {% for author in book.authors.all %}
+                <li>{{author}}</li>
+                {% endfor %}
+            </ul>
+        </div>
 
         {% if authors %}
         <form action="/books/{{book.id}}/assign" method="POST">
